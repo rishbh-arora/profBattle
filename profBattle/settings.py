@@ -88,12 +88,12 @@ WSGI_APPLICATION = 'profBattle.wsgi.application'
 
 DATABASES = {
     'default': {
-        "ENGINE": "django.db.backends.mysql",
-        'NAME': 'hack',
-        'USER': 'root',
-        'PASSWORD': 'manvswild',
-        'HOST': "localhost",
-        'PORT': "3306"
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'profbattle',
+        'USER': 'profbattle_user',
+        'PASSWORD': 'sod8KJH6OXwKVOdbtcW1mYcDuAEy5K6O',
+        'HOST': "dpg-cpi9o4q1hbls73bemqn0-a.oregon-postgres.render.com",
+        'PORT': "5432"
     }
 }
 
