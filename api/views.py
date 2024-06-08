@@ -8,6 +8,8 @@ import random
 from django.core.paginator import Paginator
 from rest_framework.generics import CreateAPIView
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
+from rest_framework.pagination import LimitOffsetPagination
 
 class FacViewset(ReadOnlyModelViewSet):
     queryset = Faculty.objects.all()
@@ -30,9 +32,16 @@ class FacViewset(ReadOnlyModelViewSet):
     @action(detail=False, methods=['get'])
     def search(self, request):
         key = request.query_params.get('name', None)
-        fac = self.get_queryset().filter(name__icontains = key)
-        serializer = self.get_serializer(fac, many=True)
-        return Response(serializer.data)
+        fac = self.get_queryset().filter(name__icontains=key)
+
+        # Apply pagination
+        paginator = LimitOffsetPagination()
+        paginated_fac = paginator.paginate_queryset(fac, request, view=self)
+        
+        # Serialize the paginated queryset
+        serializer = self.get_serializer(paginated_fac, many=True)
+        return paginator.get_paginated_response(serializer.data)
+
 
 class UserViewset(CreateAPIView):
     queryset = User.objects.all()
