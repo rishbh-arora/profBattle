@@ -1,2 +1,3 @@
 importData.py
 *.pyc
+__pycache__
