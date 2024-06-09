@@ -10,3 +10,4 @@ class Faculty(models.Model):
     marks = models.PositiveIntegerField(validators=[MaxValueValidator(100)])
     fit = models.PositiveIntegerField(validators=[MaxValueValidator(100)])
     ap = models.PositiveIntegerField(validators=[MaxValueValidator(100)])
+    link = models.URLField(null=True, blank=True)

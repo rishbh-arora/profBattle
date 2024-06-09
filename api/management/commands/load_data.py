@@ -23,6 +23,7 @@ class Command(BaseCommand):
                     skill = int(row[5]),
                     marks = int(row[6]),
                     fit = int(row[7]),
-                    ap = int(row[8])
+                    ap = int(row[8]),
+                    link = row[9]
                 )
                 count += 1
