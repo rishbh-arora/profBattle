@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 from rest_framework.generics import CreateAPIView
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.pagination import PageNumberPagination
 
 class FacViewset(ReadOnlyModelViewSet):
     queryset = Faculty.objects.all()
@@ -35,8 +35,8 @@ class FacViewset(ReadOnlyModelViewSet):
         fac = self.get_queryset().filter(name__icontains=key)
 
         # Apply pagination
-        paginator = LimitOffsetPagination()
-        paginated_fac = paginator.paginate_queryset(fac, request, view=self)
+        paginator = PageNumberPagination()
+        paginated_fac = paginator.paginate_queryset(queryset=fac, request=request, view=self)
         
         # Serialize the paginated queryset
         serializer = self.get_serializer(paginated_fac, many=True)
